@@ -15,6 +15,8 @@ raven
 django-localflavor
 djangorestframework-jwt
 django-rest-swagger
+drfdocs
+coreapi-cli
 python-dateutil
 pymongo
 requests
