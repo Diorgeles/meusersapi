@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from __future__ import unicode_literals
 # Stdlib imports
-
+import uuid
 # Core Django imports
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -17,7 +17,7 @@ from django_extensions.db.models import (
 )
 from rest_framework.authtoken.models import Token
 # Imports from your apps
-from core.abstract import Phone, Email
+
 from .managers import CustomUserManager
 
 
@@ -25,6 +25,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     """
     Modelo para salvar o usuario somente com o email
     """
+    code = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
+
     email = models.EmailField(
         _('email address'), max_length=255,
         unique=True, db_index=True
@@ -109,6 +115,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
         verbose_name = _(u'Usuário')
         verbose_name_plural = _(u'Usuários')
 
+        permissions = (
+            (
+                'can_access_users',
+                'Acesso aos usuarios'
+            ),
+        )
+
 
 class Profile(TimeStampedModel):
     """
@@ -118,6 +131,12 @@ class Profile(TimeStampedModel):
     user = models.OneToOneField(
         CustomUser,
         verbose_name=_('Usuário')
+    )
+
+    code = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
     )
 
     name = models.CharField(
