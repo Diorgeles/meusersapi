@@ -72,10 +72,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
         """
         Retorna o nome do perfil criado
         """
-        full_name = u'{}'.format(
-            self.get_profile().get_full_name()
-        )
-        return full_name.strip()
+        try:
+            full_name = u'{}'.format(
+                self.get_profile().get_full_name()
+            )
+            return full_name.strip()
+        except Exception as e:
+            return None
 
     full_name = property(get_full_name)
 
