@@ -16,10 +16,15 @@ from rest_framework.reverse import reverse
 # Imports from your apps
 
 
+
 class APIRoot(APIView):
 
     def get(self, request, format=None):
 
         data = {
+            'usuarios': reverse(
+                'users:list-and-create',
+                request=request
+            )
         }
         return Response(data)
