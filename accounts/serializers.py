@@ -13,6 +13,8 @@ from accounts.models import (
     CustomUser, Profile
 )
 
+from addresses.serializers import AddressSerializer
+
 
 class ProfileSerializer(serializers.ModelSerializer):
 
@@ -28,6 +30,8 @@ class UserShortListSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
 
     token = serializers.SerializerMethodField()
+
+    address = AddressSerializer(many=True)
 
     def get_name(self, obj):
         return '{}'.format(
@@ -46,6 +50,7 @@ class UserShortListSerializer(serializers.ModelSerializer):
             'email',
             'profile',
             'name',
+            'address',
             'token',
             'created',
             'modified',
