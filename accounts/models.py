@@ -79,6 +79,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
 
     full_name = property(get_full_name)
 
+    def get_short_name(self):
+        """
+        Retorna o nome do perfil criado
+        """
+        full_name = u'{}'.format(
+            self.get_profile().get_full_name()
+        )
+        return full_name.strip()
+
     def get_profile(self):
         """
         Alias para buscar o perfil do usuario
