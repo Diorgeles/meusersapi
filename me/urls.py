@@ -8,12 +8,16 @@ from django.contrib import admin
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
+from rest_framework_swagger.views import get_swagger_view
+
 
 admin.autodiscover()
 
 sitemaps = {
     # Place sitemaps here
 }
+
+schema_view = get_swagger_view(title='Users-Me API')
 
 
 urlpatterns = [
@@ -27,12 +31,7 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'
     ),
 
-    url(
-        r'^accounts/',
-        include(
-            'accounts.urls', namespace="accounts"
-        )
-    ),
+    url(r'^$', schema_view),
 
     # API
 
