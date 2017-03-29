@@ -14,6 +14,7 @@ from rest_framework.routers import DefaultRouter
 
 from .v1_api import APIRoot
 
+from accounts.urls import urlpatterns as accounts_urls
 
 # http -a admin:password123 http://127.0.0.1:8000/users/
 
@@ -28,5 +29,7 @@ urlpatterns = [
         APIRoot.as_view(),
     ),
 ]
+
+urlpatterns += accounts_urls
 
 urlpatterns = format_suffix_patterns(urlpatterns)
