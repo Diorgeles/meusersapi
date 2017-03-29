@@ -70,8 +70,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
 
     def get_full_name(self):
         """
-        Retorna o primeiro nome mais o ultimo nome, com
-        um espaço entre eles
+        Retorna o nome do perfil criado
         """
         full_name = u'{}'.format(
             self.get_profile().get_full_name()
@@ -80,26 +79,25 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
 
     full_name = property(get_full_name)
 
-    def get_short_name(self):
-        """
-        Retorna somente o primeiro nome
-        """
-        try:
-            return u'{}'.format(self.get_profile().first_name)
-        except Exception as e:
-            return '{} '.format(
-                self.email,
-            )
-
     def get_profile(self):
         """
         Alias para buscar o perfil do usuario
         """
 
         try:
-            return self.userprofile
+            return self.profile
         except Exception as e:
             return None
+
+    def get_token(self):
+        """
+        Retorna o primeiro nome mais o ultimo nome, com
+        um espaço entre eles
+        """
+        token = u'{}'.format(
+            self.auth_token.key
+        )
+        return token.strip()
 
     def __str__(self):
 
