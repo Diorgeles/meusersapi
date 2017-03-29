@@ -21,6 +21,8 @@ schema_view = get_swagger_view(title='Users-Me API')
 
 
 urlpatterns = [
+    # url(r'^$', schema_view),
+
     url(r'^admin/', include(admin.site.urls)),
 
     # SEO API's
@@ -31,7 +33,7 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'
     ),
 
-    url(r'^$', schema_view),
+
 
     # API
 
@@ -39,6 +41,13 @@ urlpatterns = [
         r'^api/v1/',
         include(
             'api.v1_urls', namespace="v1"
+        )
+    ),
+
+    url(
+        r'^users/',
+        include(
+            'accounts.urls', namespace="users"
         )
     ),
 
@@ -63,7 +72,9 @@ urlpatterns = [
             'rest_framework.urls',
             namespace='rest_framework'
         )
-    )
+    ),
+
+
 
 
 
