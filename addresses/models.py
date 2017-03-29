@@ -13,12 +13,13 @@ from django_extensions.db.models import (
 
 class Address(TimeStampedModel):
     """
-    Perfil do usuario
+    Endereços do usuário
     """
 
     user = models.ForeignKey(
         'accounts.CustomUser',
-        verbose_name=_('Usuário')
+        verbose_name=_('Usuário'),
+        related_name='address'
     )
 
     street = models.CharField(
