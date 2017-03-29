@@ -111,7 +111,6 @@ class UserProfileAdmin(admin.ModelAdmin):
     # campos que podem ser filtrados
     list_filter = (
         'created',
-        'kind_user',
     )
 
 
