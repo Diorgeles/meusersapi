@@ -8,8 +8,11 @@ from django.contrib import admin
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
+from rest_framework.documentation import include_docs_urls
+from rest_framework import routers
 from rest_framework_swagger.views import get_swagger_view
 
+from api.v1_api import APIRoot
 
 admin.autodiscover()
 
@@ -21,35 +24,10 @@ schema_view = get_swagger_view(title='Users-Me API')
 
 
 urlpatterns = [
-    # url(r'^$', schema_view),
-
-    url(r'^admin/', include(admin.site.urls)),
-
-    # SEO API's
-    url(
-        r'^sitemap\.xml$',
-        sitemap,
-        {'sitemaps': sitemaps},
-        name='django.contrib.sitemaps.views.sitemap'
-    ),
 
 
+    # url(r'^$', APIRoot.as_view()),
 
-    # API
-
-    url(
-        r'^api/v1/',
-        include(
-            'api.v1_urls', namespace="v1"
-        )
-    ),
-
-    url(
-        r'^users/',
-        include(
-            'accounts.urls', namespace="users"
-        )
-    ),
 
     url(
         r'^api-token-auth/',
@@ -74,8 +52,29 @@ urlpatterns = [
         )
     ),
 
+    # SEO API's
+    url(
+        r'^sitemap\.xml$',
+        sitemap,
+        {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'
+    ),
+
+    # API
+
+    url(
+        r'^users/',
+        include(
+            'accounts.urls', namespace="users"
+        )
+    ),
 
 
+    url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^$', include('rest_framework_docs.urls')),
+    #
+    # url(r'^docs/', schema_view),
 
 
 ]
