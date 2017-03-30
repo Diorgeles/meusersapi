@@ -119,10 +119,11 @@ Retorna o perfil do usuario que esta chamando a rota
 Outros usuários cadastrados
 
 Endpoint `GET http://meusersapi.herokuapp.com/users/`
-Endpoint `GET http://meusersapi.herokuapp.com/users/paginated/\?page\=2`
+
+Endpoint com paginação `GET http://meusersapi.herokuapp.com/users/paginated/\?page\=2`
 
 
-Outros perfis:
+Detalhe de outro perfil:
 
 Endpoint `GET http://meusersapi.herokuapp.com/users/profile/f06a2a3e-4387-46c3-9626-c31d2a696725/`
 
